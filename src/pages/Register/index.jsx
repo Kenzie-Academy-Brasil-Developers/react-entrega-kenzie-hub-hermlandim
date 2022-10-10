@@ -1,0 +1,190 @@
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import { Link, useNavigate } from 'react-router-dom';
+import Form from '../../components/Form';
+import api from '../../services/api';
+import { TagConstructor } from '../../components/Typography/typography';
+import { Inputs, Select } from '../../components/Inputs';
+import { Buttons } from '../../components/Buttons';
+import { Container } from '../../components/Container';
+
+const schema = yup.object({
+  name: yup.string().required('Nome é obrigatório'),
+  email: yup
+    .string()
+    .email('Email é obrigatório')
+    .required('Email é obrigatório'),
+  password: yup
+    .string()
+    .matches(/[A-Z]/, 'Deve conter ao menos 1 letra maiúscula')
+    .matches(/[a-z]/, 'Deve conter ao menos 1 letra minúscula')
+    .matches(/(\d)/, 'Deve conter ao menos 1 número')
+    .matches(/(\W)|_/, 'Deve conter ao menos 1 caracter especial')
+    .matches(/.{8,}/, 'Deve conter no mínimo 8 dígitos')
+    .required('Senha é obrigatória'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Confirmação de senha incorreta'),
+  bio: yup.string().required('Conte um pouco sobre você'),
+  contact: yup.string().required('Digite seu número'),
+});
+
+const Register = () => {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    // reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const registerUser = (data) => {
+    api
+      .post('/users', data)
+      .then((resp) => {
+        console.log(resp);
+        navigate('/login');
+      })
+      .catch((err) => console.log(err));
+    // reset();
+  };
+
+  return (
+    <Container
+      height='100vh'
+      display='flex'
+      flexDirection='column'
+      justifyContent='center'
+    >
+      <TagConstructor
+        tag='div'
+        typography='link-back'
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        marginBottom='1rem'
+      >
+        <TagConstructor
+          tag='h1'
+          typography='h1'
+          fontColor='var(--color-primary)'
+        >
+          {' '}
+          Kenzie Hub
+        </TagConstructor>
+
+        <Link to='/login'>Voltar</Link>
+      </TagConstructor>
+
+      <Form onSubmit={handleSubmit(registerUser)}>
+        <TagConstructor typography='h2' tag='h2'>
+          Crie sua conta
+        </TagConstructor>
+
+        <TagConstructor tag='span' typography='headline-bold'>
+          Rápido e grátis, vamos nessa!
+        </TagConstructor>
+        <TagConstructor tag='label' typography='headline' htmlFor='name'>
+          Nome
+        </TagConstructor>
+        <Inputs
+          type='text'
+          id='name'
+          placeholder='Digite seu nome'
+          {...register('name')}
+        />
+        <p>{errors.name?.message}</p>
+
+        <TagConstructor tag='label' typography='headline' htmlFor='email'>
+          Email
+        </TagConstructor>
+        <Inputs
+          type='email'
+          id='email'
+          placeholder='Digite seu email'
+          {...register('email')}
+        />
+        <p>{errors.email?.message}</p>
+
+        <TagConstructor tag='label' typography='headline' htmlFor='password'>
+          Senha
+        </TagConstructor>
+        <Inputs
+          type='password'
+          id='password'
+          placeholder='Digite sua senha'
+          {...register('password')}
+        />
+        <p>{errors.password?.message}</p>
+
+        <TagConstructor
+          tag='label'
+          typography='headline'
+          htmlFor='confirm-password'
+        >
+          Confirmar Senha
+        </TagConstructor>
+        <Inputs
+          type='password'
+          id='confirm-password'
+          placeholder='Confirme sua senha'
+          {...register('confirmPassword')}
+        />
+        <p>{errors.confirmPassword?.message}</p>
+
+        <TagConstructor tag='label' typography='headline' htmlFor='bio'>
+          Bio
+        </TagConstructor>
+        <Inputs
+          type='text'
+          id='bio'
+          placeholder='Fale sobre você'
+          {...register('bio')}
+        />
+        <p>{errors.bio?.message}</p>
+
+        <TagConstructor tag='label' typography='headline' htmlFor='contact'>
+          Contato
+        </TagConstructor>
+        <Inputs
+          type='number'
+          id='contact'
+          placeholder='Opção de contato'
+          {...register('contact')}
+        />
+        <p>{errors.contact?.message}</p>
+
+        <TagConstructor
+          tag='label'
+          typography='headline'
+          htmlFor='course_module'
+        >
+          Selecionar Módulo
+        </TagConstructor>
+        <Select
+          type='text'
+          id='course_module'
+          placeholder='Opção de contato'
+          {...register('course_module')}
+        >
+          <option>Primeiro módulo (Introdução ao Frontend)</option>
+          <option>Segundo módulo (Frontend Avançado)</option>
+          <option>Terceiro módulo (Introdução ao Backend)</option>
+          <option>Quarto módulo (Backend Avançado)</option>
+        </Select>
+        <p>{errors.contact?.message}</p>
+
+        <Buttons typeButton='primary-negative' type='submit'>
+          Cadastrar-se
+        </Buttons>
+      </Form>
+    </Container>
+  );
+};
+
+export default Register;
