@@ -19,5 +19,6 @@ export const BaseTitle = ({ children, className, tag, htmlFor }) => (
     )}
     {tag === 'div' && <div className={className}>{children}</div>}
     {tag === 'header' && <header className={className}>{children}</header>}
+    {tag === 'main' && <main className={className}>{children}</main>}
   </>
 );

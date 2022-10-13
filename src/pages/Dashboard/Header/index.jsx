@@ -43,7 +43,6 @@ const Header = () => {
             typography='h1'
             fontColor='var(--color-primary)'
           >
-            {' '}
             Kenzie Hub
           </TagConstructor>
 

@@ -19,7 +19,7 @@ const schema = yup.object({
   password: yup
     .string()
     .required('Senha é obrigatória')
-    .min(8, 'No mínimo 8 caracteres'),
+    .min(6, 'No mínimo 6 caracteres'),
 });
 
 // eslint-disable-next-line react/prop-types

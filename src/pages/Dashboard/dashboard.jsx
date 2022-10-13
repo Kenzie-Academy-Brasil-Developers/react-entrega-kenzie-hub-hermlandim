@@ -3,8 +3,8 @@ import Main from './Main';
 
 const Dashboard = () => (
   <>
-    <Header />;
-    <Main />;
+    <Header />
+    <Main />
   </>
 );
 
