@@ -18,6 +18,8 @@ export const BaseTitle = ({ children, className, tag, htmlFor }) => (
       </label>
     )}
     {tag === 'div' && <div className={className}>{children}</div>}
+    {tag === 'ul' && <ul className={className}>{children}</ul>}
+    {tag === 'li' && <li className={className}>{children}</li>}
     {tag === 'header' && <header className={className}>{children}</header>}
     {tag === 'main' && <main className={className}>{children}</main>}
   </>

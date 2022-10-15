@@ -37,6 +37,16 @@ export const TagConstructor = styled(BaseTitle)`
     }
   }
 
+  svg {
+    color: var(--color-grey-0);
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
   ${({ typography }) => {
     switch (typography) {
       case 'h1':
@@ -91,6 +101,66 @@ export const TagConstructor = styled(BaseTitle)`
 
             &:hover {
               background-color: var(--color-grey-3);
+            }
+          }
+        `;
+      case 'ul':
+        return css`
+          background-color: var(--color-grey-3);
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          li {
+            background-color: var(--color-grey-4);
+            padding: 1rem;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            svg {
+              color: var(--color-grey-0);
+              cursor: pointer;
+              width: 1.3rem;
+              height: 1.3rem;
+            }
+
+            div {
+              display: flex;
+              align-items: center;
+              gap: 1.5rem;
+            }
+
+            h1 {
+              font-size: 18px;
+              font-weight: 700;
+            }
+
+            h2 {
+              font-size: 16px;
+              font-weight: 700;
+            }
+
+            h3 {
+              font-size: 14px;
+              font-weight: 700;
+            }
+            h4 {
+              font-size: 12px;
+              font-weight: 400;
+              color: var(--color-grey-1);
+            }
+            span {
+              font-size: 12px;
+              font-weight: 600;
+              color: var(--color-grey-1);
+              text-align: center;
+            }
+            p {
+              font-size: 12px;
+              font-weight: 400;
+              font-style: italic;
             }
           }
         `;

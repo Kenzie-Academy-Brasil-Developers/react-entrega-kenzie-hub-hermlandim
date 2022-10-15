@@ -12,7 +12,9 @@ const RoutesMain = () => {
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<LoginPage setUser={setUser} />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/dashboard' element={<Dashboard user={user} />} />
+      <Route path='/dashboard' element={<Dashboard user={user} />}>
+        {/* <Route path='/register' /> */}
+      </Route>
     </Routes>
   );
 };

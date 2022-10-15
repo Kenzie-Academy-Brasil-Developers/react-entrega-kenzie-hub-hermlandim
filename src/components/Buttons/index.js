@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 
 export const Buttons = styled.button`
-  color: var(--color-grey-0);
+  /* color: var(--color-grey-0); */
 
   font-size: 16px;
   font-weight: 500;
@@ -58,6 +58,21 @@ export const Buttons = styled.button`
         return css`
           /* padding: 0.5rem 1rem 0.5rem 1rem; */
           background-color: var(--color-grey-3);
+        `;
+
+      case 'icon-add':
+        return css`
+          padding: 0;
+          border: none;
+          border-radius: 0;
+          /* color: var(--color-grey-0); */
+          /* background-color: var(--color-grey-3); */
+          svg {
+            /* background-color: var(--color-grey-0); */
+            height: 100%;
+            width: 100%;
+            /* padding: 1rem; */
+          }
         `;
     }
   }}

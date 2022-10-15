@@ -44,6 +44,11 @@ ul, ol, li{
   list-style: none; 
 }
 
+li{
+  font-size: 16px;
+  font-weight: 600;
+}
+
 a{
   text-decoration: none;
 }
