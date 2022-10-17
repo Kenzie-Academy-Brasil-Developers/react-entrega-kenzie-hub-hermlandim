@@ -15,6 +15,7 @@ export const TagConstructor = styled(BaseTitle)`
   border-bottom: ${(props) => props.borderBottom};
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.backgroundColor};
+  background: ${(props) => props.background};
 
   display: ${(props) => props.display};
   gap: ${(props) => props.gap};
@@ -24,6 +25,7 @@ export const TagConstructor = styled(BaseTitle)`
 
   padding: ${(props) => props.padding};
   height: ${(props) => props.height};
+  width: ${(props) => props.width};
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   bottom: ${(props) => props.bottom};
@@ -162,6 +164,18 @@ export const TagConstructor = styled(BaseTitle)`
               font-weight: 400;
               font-style: italic;
             }
+          }
+        `;
+    }
+  }}
+
+  ${({ variant }) => {
+    switch (variant) {
+      case 'svg-close':
+        return css`
+          svg {
+            height: 1rem;
+            width: 1rem;
           }
         `;
     }
