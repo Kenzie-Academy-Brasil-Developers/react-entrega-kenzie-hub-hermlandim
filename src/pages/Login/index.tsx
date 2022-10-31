@@ -1,17 +1,21 @@
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import Form from '../../components/Form';
-import api from '../../services/api';
 import { TagConstructor } from '../../components/Typography/typography';
 import { Inputs } from '../../components/Inputs';
 import { Buttons } from '../../components/Buttons';
 import { Container } from '../../components/Container';
+import { AuthContext } from '../../contexts/AuthContext';
+import * as yup from 'yup';
 
-const schema = yup.object({
+export interface IUserLogin {
+  email: string;
+  password: string;
+}
+
+const schemaLogin = yup.object({
   email: yup
     .string()
     .email('Email é obrigatório')
@@ -23,35 +27,17 @@ const schema = yup.object({
 });
 
 // eslint-disable-next-line react/prop-types
-const LoginPage = ({ setUser }) => {
-  const navigate = useNavigate();
+const LoginPage = () => {
+  const { loginUser } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     // reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<IUserLogin>({
+    resolver: yupResolver(schemaLogin),
   });
-
-  const loginUser = (data) => {
-    toast.promise(
-      api.post('/sessions', data).then((resp) => {
-        setUser(resp.data.user);
-        localStorage.setItem('@Kenzie-token', resp.data.token);
-        localStorage.setItem('@Kenzie-id', resp.data.user.id);
-        navigate('/dashboard');
-      }),
-      {
-        pending: 'Loading',
-        success: `Sucesso! Seja Bem-Vindo(a)`,
-        error: 'Conta inexistente, cadrastre-se!',
-      }
-    );
-
-    // console.log(data);
-    // reset();
-  };
 
   return (
     <Container

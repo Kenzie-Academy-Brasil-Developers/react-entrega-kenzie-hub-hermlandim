@@ -1,8 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable arrow-body-style */
-import React from 'react';
 
-export const BaseTitle = ({ children, className, tag, htmlFor }) => (
+import { ReactNode } from 'react';
+
+interface IBaseTitleProps {
+  children: ReactNode;
+  className?: string;
+  tag: string;
+  htmlFor?: string;
+}
+
+export const BaseTitle = ({
+  children,
+  className,
+  tag,
+  htmlFor,
+}: IBaseTitleProps) => (
   <>
     {tag === 'h1' && <h1 className={className}>{children}</h1>}
     {tag === 'h2' && <h2 className={className}>{children}</h2>}

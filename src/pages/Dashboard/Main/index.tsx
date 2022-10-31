@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { MdAddBox } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { Container } from '../../../components/Container';
 import { TagConstructor } from '../../../components/Typography/typography';
 import { AuthContext } from '../../../contexts/AuthContext';
@@ -25,7 +26,9 @@ const Main = () => {
             Tecnologias
           </TagConstructor>
 
-          <MdAddBox onClick={() => setShowModalTech(true)} />
+          <Link to='register-tech'>
+            <MdAddBox onClick={() => setShowModalTech(true)} />
+          </Link>
         </TagConstructor>
 
         <TagConstructor

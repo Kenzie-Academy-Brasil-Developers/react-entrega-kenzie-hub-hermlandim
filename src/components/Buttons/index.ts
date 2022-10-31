@@ -1,7 +1,11 @@
 /* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
 
-export const Buttons = styled.button`
+interface ButtonsProps {
+  typeButton: string;
+}
+
+export const Buttons = styled.button<ButtonsProps>`
   /* color: var(--color-grey-0); */
   color: var(--color-grey-0);
   font-size: 16px;

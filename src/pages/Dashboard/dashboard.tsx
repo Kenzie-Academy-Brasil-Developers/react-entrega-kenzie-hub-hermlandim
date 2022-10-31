@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { useContext } from 'react';
 import RegisterTech from '../RegisterTech';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -8,7 +10,7 @@ const Dashboard = () => {
   const { showModalTech } = useContext(AuthContext);
   return (
     <>
-      {showModalTech ? <RegisterTech /> : console.log('object')}
+      {showModalTech ? <RegisterTech /> : null}
       <Header />
       <Main />
     </>

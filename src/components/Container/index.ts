@@ -2,16 +2,34 @@
 /* eslint-disable default-case */
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface IContainerProps {
+  fontColor?: string;
+  textAlign?: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  height?: string;
+  maxWidth?: string;
+  display?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  flexDirection?: string;
+  gap?: string;
+  position?: string;
+  top?: string;
+  bottom?: string;
+  marginLeft?: string;
+  marginBottom?: string;
+  container?: string;
+  media?: string;
+}
+
+export const Container = styled.div<IContainerProps>`
   width: 90%;
   min-width: 100px;
   max-width: 450px;
   margin: 0 auto;
-  /* height: 100vh;
 
-  color: ${(props) =>
-    props.fontColor}; /* utilizando o valor da props como valor de color */
-  /* Regra condicional com props, o CSS se altera com base no valor da prop */
+  color: ${(props) => props.fontColor};
   text-align: ${(props) => props.textAlign};
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.backgroundColor};

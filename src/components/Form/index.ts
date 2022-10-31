@@ -1,7 +1,33 @@
 /* eslint-disable consistent-return */
 import styled from 'styled-components';
 
-const Form = styled.form`
+interface IFormProps {
+  fontColor?: string;
+  textAlign?: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  height?: string;
+  maxWidth?: string;
+  display?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  flexDirection?: string;
+  gap?: string;
+  position?: string;
+  top?: string;
+  bottom?: string;
+  marginLeft?: string;
+  marginBottom?: string;
+  border?: string;
+  borderTop?: string;
+  borderBottom?: string;
+  padding?: string;
+  width?: string;
+  marginTop?: string;
+  maxHeight?: string;
+}
+
+const Form = styled.form<IFormProps>`
   display: flex;
   flex-direction: column;
 

@@ -1,9 +1,39 @@
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
+
 import styled, { css } from 'styled-components';
 import { BaseTitle } from '../BaseTitle/basetitle';
 
-export const TagConstructor = styled(BaseTitle)`
+interface ITypographyProps {
+  fontColor?: string;
+  textAlign?: string;
+  borderRadius?: string;
+  background?: string;
+  backgroundColor?: string;
+  height?: string;
+  maxWidth?: string;
+  display?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  flexDirection?: string;
+  gap?: string;
+  position?: string;
+  top?: string;
+  bottom?: string;
+  marginLeft?: string;
+  marginBottom?: string;
+  border?: string;
+  borderTop?: string;
+  borderBottom?: string;
+  padding?: string;
+  width?: string;
+  marginTop?: string;
+  zIndex?: string;
+  typography?: string;
+  variant?: string;
+}
+
+export const TagConstructor = styled(BaseTitle)<ITypographyProps>`
   line-height: 16px;
   font-weight: 700;
   color: ${(props) =>
@@ -29,6 +59,7 @@ export const TagConstructor = styled(BaseTitle)`
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   bottom: ${(props) => props.bottom};
+  z-index: ${(props) => props.zIndex};
   margin-left: ${(props) => props.marginLeft};
   margin-bottom: ${(props) => props.marginBottom};
   margin-top: ${(props) => props.marginTop};

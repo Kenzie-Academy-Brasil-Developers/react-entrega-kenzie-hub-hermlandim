@@ -6,21 +6,24 @@ import { Inputs, Select } from '../../components/Inputs';
 import { TagConstructor } from '../../components/Typography/typography';
 import { Buttons } from '../../components/Buttons';
 import { AuthContext } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
+
+export interface IRegisterTech {
+  title: string;
+  status: string;
+}
 
 const RegisterTech = () => {
-  const { setShowModalTech } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm();
+  const { setShowModalTech, registerTechnologies } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm<IRegisterTech>();
 
-  const registerTechnologies = (data) => {
-    console.log('oi');
-    console.log(data);
-  };
   return (
     <TagConstructor
       tag='div'
       height='100vh'
       width='100vw'
       position='fixed'
+      zIndex='101'
       display='flex'
       justifyContent='center'
       alignItems='center'
@@ -29,7 +32,7 @@ const RegisterTech = () => {
       <Form
         onSubmit={handleSubmit(registerTechnologies)}
         gap='15px'
-        variant='buttons'
+        // variant='buttons'
         height='50%'
         width='90%'
         justifyContent='space-evenly'
@@ -46,7 +49,9 @@ const RegisterTech = () => {
             Cadastrar Tecnologia
           </TagConstructor>
 
-          <AiOutlineClose onClick={() => setShowModalTech(null)} />
+          <Link to='/dashboard'>
+            <AiOutlineClose onClick={() => setShowModalTech(false)} />
+          </Link>
         </TagConstructor>
 
         <TagConstructor tag='label' typography='headline' htmlFor='name'>
@@ -55,9 +60,9 @@ const RegisterTech = () => {
 
         <Inputs
           type='text'
-          id='name'
+          id='title'
           placeholder='Digite a linguagem'
-          {...register('name')}
+          {...register('title')}
         />
 
         <TagConstructor tag='label' typography='headline' htmlFor='experience'>
@@ -65,10 +70,9 @@ const RegisterTech = () => {
         </TagConstructor>
 
         <Select
-          type='text'
-          id='experience'
+          id='status'
           placeholder='Opção de contato'
-          {...register('experience')}
+          {...register('status')}
         >
           <option>Iniciante</option>
           <option>Intermediário</option>

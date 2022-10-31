@@ -1,16 +1,28 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import Form from '../../components/Form';
-import api from '../../services/api';
+
 import { TagConstructor } from '../../components/Typography/typography';
 import { Inputs, Select } from '../../components/Inputs';
 import { Buttons } from '../../components/Buttons';
 import { Container } from '../../components/Container';
+import { AuthContext } from '../../contexts/AuthContext';
+import * as yup from 'yup';
 
-const schema = yup.object({
+export interface IUserRegister {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
+
+const schemaRegister = yup.object({
   name: yup.string().required('Nome é obrigatório'),
   email: yup
     .string()
@@ -32,27 +44,16 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  const navigate = useNavigate();
+  const { registerUser } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
     // reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<IUserRegister>({
+    resolver: yupResolver(schemaRegister),
   });
-
-  const registerUser = (data) => {
-    api
-      .post('/users', data)
-      .then((resp) => {
-        console.log(resp);
-        navigate('/login');
-      })
-      .catch((err) => console.log(err));
-    // reset();
-  };
 
   return (
     <Container
@@ -125,13 +126,13 @@ const Register = () => {
         <TagConstructor
           tag='label'
           typography='headline'
-          htmlFor='confirm-password'
+          htmlFor='confirmPassword'
         >
           Confirmar Senha
         </TagConstructor>
         <Inputs
           type='password'
-          id='confirm-password'
+          id='confirmPassword'
           placeholder='Confirme sua senha'
           {...register('confirmPassword')}
         />
@@ -167,7 +168,6 @@ const Register = () => {
           Selecionar Módulo
         </TagConstructor>
         <Select
-          type='text'
           id='course_module'
           placeholder='Opção de contato'
           {...register('course_module')}

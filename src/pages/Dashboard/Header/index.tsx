@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { ReactNode, useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { Container } from '../../../components/Container';
 import { TagConstructor } from '../../../components/Typography/typography';
-import api from '../../../services/api';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const Header = () => {
-  const [user, setUser] = useState({});
-  const userID = localStorage.getItem('@Kenzie-id');
-
-  useEffect(() => {
-    api.get(`/users/${userID}`).then((response) => setUser(response.data));
-  }, []);
+  const { user } = useContext(AuthContext);
 
   const logout = () => {
     localStorage.clear();
@@ -60,10 +55,11 @@ const Header = () => {
       >
         <Container container='desktop' media='mediaHeader'>
           <TagConstructor tag='h1' typography='h1' marginBottom='1rem'>
-            Olá, {user.name}
+            Olá,
+            {user?.name}
           </TagConstructor>
           <TagConstructor tag='span' typography='headline-bold'>
-            {user.course_module}
+            {user?.course_module}
           </TagConstructor>
         </Container>
       </TagConstructor>
